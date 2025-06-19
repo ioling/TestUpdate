@@ -1,5 +1,25 @@
 <script setup lang="ts">
 import HelloWorld from './components/HelloWorld.vue'
+  // 监听更新消息
+  window.electronAPI.onUpdateMessage((event, message) => {
+    console.log(message);
+  });
+
+  // 监听更新可用
+  window.electronAPI.onUpdateAvailable((event, version) => {
+    console.log(`新版本 ${version} 可用，正在下载...`);
+  });
+
+  // 监听下载进度
+  window.electronAPI.onDownloadProgress((event, progress) => {
+    console.log(`${progress.percent}%`);
+  });
+
+  // 监听更新下载完成
+  window.electronAPI.onUpdateDownloaded((event, version) => {
+    console.log(`版本 ${version} 已下载完成，可以安装`);
+  });
+
 </script>
 
 <template>
